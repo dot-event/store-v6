@@ -1,14 +1,14 @@
-import createStore from "../dist/core"
+import composeStore from "../dist/core"
 
 test("get", () => {
-  const store = createStore({
+  const store = composeStore({
     state: { hello: { world: true } },
   })
   expect(store.get("hello.world")).toBe(true)
 })
 
 test("delete", async () => {
-  const store = createStore({
+  const store = composeStore({
     state: { hello: { world: true } },
   })
   await store.delete("hello.world")
@@ -16,7 +16,7 @@ test("delete", async () => {
 })
 
 test("merge", async () => {
-  const store = createStore({
+  const store = composeStore({
     state: { hello: { world: true } },
   })
 
@@ -28,7 +28,7 @@ test("merge", async () => {
 })
 
 test("set", async () => {
-  const store = createStore()
+  const store = composeStore()
 
   await store.set("hello.world", true)
   expect(store.get("hello.world")).toBe(true)
@@ -38,7 +38,7 @@ test("set", async () => {
 })
 
 test("time", async () => {
-  const store = createStore()
+  const store = composeStore()
   await store.time("hello.world")
   expect(store.get("hello.world")).toEqual(
     expect.any(Number)
@@ -46,7 +46,7 @@ test("time", async () => {
 })
 
 test("toggle", async () => {
-  const store = createStore({
+  const store = composeStore({
     state: { hello: { world: true } },
   })
   await store.toggle("hello.world")

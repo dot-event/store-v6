@@ -13,8 +13,8 @@ npm install --save dot-store
 ## Create store
 
 ```js
-import createStore from "dot-store"
-const store = createStore()
+import composeStore from "dot-store"
+const store = composeStore()
 ```
 
 ## Use store
