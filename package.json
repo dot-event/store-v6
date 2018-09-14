@@ -13,9 +13,10 @@
     "watchman-babel"
   ],
   "version": "4.1.1",
-  "description": "",
+  "description": "Immutable store extension for dot-event",
   "keywords": [
-    "Immutable store extension for dot-event"
+    "immutable",
+    "store"
   ],
   "author": "dot-store <oss@dot-store.io>",
   "repository": {
@@ -27,7 +28,7 @@
   "dependencies": {
     "@babel/runtime": "7.0.0",
     "@invrs/dot-prop-immutable": "^3.0.0",
-    "dot-event": "^0.5.0"
+    "dot-event": "^0.6.0"
   },
   "devDependencies": {
     "@babel/cli": "7.0.0",
