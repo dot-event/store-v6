@@ -27,7 +27,7 @@
   "homepage": "https://github.com/dot-store/core#readme",
   "dependencies": {
     "@babel/runtime": "7.0.0",
-    "@invrs/dot-prop-immutable": "^3.0.0",
+    "@dot-store/dot-prop-immutable": "^3.1.0",
     "dot-event": "^1.1.0"
   },
   "devDependencies": {
