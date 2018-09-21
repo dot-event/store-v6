@@ -13,7 +13,7 @@
     "watchman-babel"
   ],
   "version": "4.5.0",
-  "description": "Immutable store extension for dot-event",
+  "description": "Event emitter & store that promotes decoupled and readable code",
   "keywords": [
     "immutable",
     "store"
@@ -28,7 +28,7 @@
   "dependencies": {
     "@babel/runtime": "7.0.0",
     "@dot-store/dot-prop-immutable": "^3.1.0",
-    "dot-event": "^1.1.2"
+    "dot-event": "^1.2.0"
   },
   "devDependencies": {
     "@babel/cli": "7.0.0",
@@ -47,7 +47,7 @@
     "husky": "1.0.0-rc.13",
     "lint-staged": "^7.2.0",
     "babel-core": "^7.0.0-bridge.0",
-    "jest": "23.4.2"
+    "jest": "23.6.0"
   },
   "main": "dist/core.js",
   "scripts": {
