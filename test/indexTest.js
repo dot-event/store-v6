@@ -3,14 +3,14 @@ import composeStore from "../dist/core"
 
 test("get", () => {
   const state = { hello: { world: true } }
-  const store = composeStore(new Events({ state }))
+  const store = composeStore(new Events(), state)
 
   expect(store.get("hello.world")).toBe(true)
 })
 
 test("delete", async () => {
   const state = { hello: { world: true } }
-  const store = composeStore(new Events({ state }))
+  const store = composeStore(new Events(), state)
 
   await store.delete("hello.world")
   expect(store.get("hello.world")).toBeUndefined()
@@ -18,7 +18,7 @@ test("delete", async () => {
 
 test("merge", async () => {
   const state = { hello: { world: true } }
-  const store = composeStore(new Events({ state }))
+  const store = composeStore(new Events(), state)
 
   await store.merge("hello", { hi: true })
   expect(store.get("hello")).toEqual({
@@ -35,8 +35,8 @@ test("merge with function", async () => {
 
   for (let i = 0; i < 100; i++) {
     promises.push(
-      store.merge("counter", () => ({
-        test: store.get("counter.test") + 1,
+      store.merge("counter", ({ get }) => ({
+        test: get("counter.test") + 1,
       }))
     )
   }
@@ -55,6 +55,31 @@ test("set", async () => {
   expect(store.get("hello.world")).toEqual({ hi: true })
 })
 
+test("set emits", async () => {
+  const events = new Events()
+  const store = composeStore(events)
+  const fn = jest.fn()
+
+  events.on("store.hello.world", fn)
+
+  await store.set("hello.world", true)
+  expect(fn.mock.calls.length).toBe(1)
+})
+
+test("set provides prevGet", async () => {
+  const events = new Events()
+  const store = composeStore(events)
+
+  expect.assertions(2)
+
+  events.on("store.hello.world", ({ prevGet }) => {
+    expect(prevGet()).toEqual({})
+    expect(store.get()).toEqual({ hello: { world: true } })
+  })
+
+  await store.set("hello.world", true)
+})
+
 test("set with function", async () => {
   const store = composeStore(new Events())
   const promises = []
@@ -63,7 +88,7 @@ test("set with function", async () => {
 
   for (let i = 0; i < 100; i++) {
     promises.push(
-      store.set("counter", () => store.get("counter") + 1)
+      store.set("counter", ({ get }) => get("counter") + 1)
     )
   }
 
