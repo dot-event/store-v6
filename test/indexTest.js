@@ -66,16 +66,22 @@ test("set emits", async () => {
   expect(fn.mock.calls.length).toBe(1)
 })
 
-test("set provides prevGet", async () => {
+test("set emit provides options", async () => {
   const events = new Events()
   const store = composeStore(events)
 
-  expect.assertions(2)
+  expect.assertions(3)
 
-  events.on("store.hello.world", ({ prevGet }) => {
-    expect(prevGet()).toEqual({})
-    expect(store.get()).toEqual({ hello: { world: true } })
-  })
+  events.on(
+    "store.hello.world",
+    ({ prevGet, store: optionStore }) => {
+      expect(prevGet()).toEqual({})
+      expect(optionStore).toBe(store)
+      expect(store.get()).toEqual({
+        hello: { world: true },
+      })
+    }
+  )
 
   await store.set("hello.world", true)
 })
