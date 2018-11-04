@@ -1,17 +1,5 @@
 {
   "name": "dot-store",
-  "starters": [
-    "basics",
-    "babel",
-    "babel-scripts",
-    "babel-web",
-    "eslint",
-    "husky",
-    "jest",
-    "jest-browser",
-    "jest-scripts",
-    "watchman-babel"
-  ],
   "version": "5.4.0",
   "description": "Event emitter & store that promotes decoupled and readable code",
   "keywords": [
@@ -25,6 +13,21 @@
   },
   "license": "MIT",
   "homepage": "https://github.com/dot-store/core#readme",
+  "cyclops": {
+    "version-tasks": {}
+  },
+  "starters": [
+    "basics",
+    "babel",
+    "babel-scripts",
+    "babel-web",
+    "eslint",
+    "husky",
+    "jest",
+    "jest-browser",
+    "jest-scripts",
+    "watchman-babel"
+  ],
   "dependencies": {
     "@babel/runtime": "7.1.2",
     "@dot-store/dot-prop-immutable": "^3.1.0",
