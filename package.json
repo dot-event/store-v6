@@ -14,6 +14,7 @@
   "license": "MIT",
   "homepage": "https://github.com/dot-store/core#readme",
   "cyclops": {
+    "git-tasks": {},
     "version-tasks": {}
   },
   "starters": [
@@ -31,7 +32,7 @@
   "dependencies": {
     "@babel/runtime": "7.1.2",
     "@dot-store/dot-prop-immutable": "3.1.0",
-    "dot-event": "2.7.0"
+    "dot-event": "2.8.0"
   },
   "devDependencies": {
     "@babel/cli": "7.1.2",
