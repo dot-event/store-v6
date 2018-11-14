@@ -15,6 +15,7 @@
   "homepage": "https://github.com/dot-store/core#readme",
   "cyclops": {
     "git-tasks": {},
+    "link-tasks": {},
     "starter-tasks": {},
     "version-tasks": {}
   },
