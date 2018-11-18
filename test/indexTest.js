@@ -1,16 +1,16 @@
 import Events from "dot-event"
-import composeStore from "../dist/core"
+import dotStore from "../dist/core"
 
 test("get", () => {
   const state = { hello: { world: true } }
-  const store = composeStore(new Events(), state)
+  const store = dotStore({ events: new Events(), state })
 
   expect(store.get("hello.world")).toBe(true)
 })
 
 test("delete", async () => {
   const state = { hello: { world: true } }
-  const store = composeStore(new Events(), state)
+  const store = dotStore({ events: new Events(), state })
 
   await store.delete("hello.world")
   expect(store.get("hello.world")).toBeUndefined()
@@ -18,7 +18,7 @@ test("delete", async () => {
 
 test("merge", async () => {
   const state = { hello: { world: true } }
-  const store = composeStore(new Events(), state)
+  const store = dotStore({ events: new Events(), state })
 
   await store.merge("hello", { hi: true })
   expect(store.get("hello")).toEqual({
@@ -28,7 +28,7 @@ test("merge", async () => {
 })
 
 test("merge with function", async () => {
-  const store = composeStore(new Events())
+  const store = dotStore({ events: new Events() })
   const promises = []
 
   await store.set("counter.test", 0)
@@ -46,7 +46,7 @@ test("merge with function", async () => {
 })
 
 test("set", async () => {
-  const store = composeStore(new Events())
+  const store = dotStore({ events: new Events() })
 
   await store.set("hello.world", true)
   expect(store.get("hello.world")).toBe(true)
@@ -57,7 +57,7 @@ test("set", async () => {
 
 test("set emits", async () => {
   const events = new Events()
-  const store = composeStore(events)
+  const store = dotStore({ events })
   const fn = jest.fn()
 
   events.on("store.hello.world", fn)
@@ -68,7 +68,7 @@ test("set emits", async () => {
 
 test("set emit provides options", async () => {
   const events = new Events()
-  const store = composeStore(events)
+  const store = dotStore({ events })
 
   expect.assertions(3)
 
@@ -87,7 +87,7 @@ test("set emit provides options", async () => {
 })
 
 test("set with function", async () => {
-  const store = composeStore(new Events())
+  const store = dotStore({ events: new Events() })
   const promises = []
 
   await store.set("counter", 0)
@@ -103,7 +103,7 @@ test("set with function", async () => {
 })
 
 test("time", async () => {
-  const store = composeStore(new Events())
+  const store = dotStore({ events: new Events() })
 
   await store.time("hello.world")
   expect(store.get("hello.world")).toEqual(

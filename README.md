@@ -1,4 +1,4 @@
-# dot-store
+# @dot-event/store
 
 dot-event store operation
 
@@ -7,19 +7,5 @@ dot-event store operation
 ## Install
 
 ```bash
-npm install --save dot-store
-```
-
-## Create store
-
-```js
-import composeStore from "dot-store"
-const store = composeStore()
-```
-
-## Use store
-
-```js
-await store.set("hello.world", true)
-store.get("hello.world") // true
+npm install --save @dot-event/store
 ```

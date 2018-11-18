@@ -1,5 +1,5 @@
 {
-  "name": "dot-store",
+  "name": "@dot-event/store",
   "version": "5.5.0",
   "description": "dot-event store operation",
   "keywords": [
@@ -10,10 +10,10 @@
   "author": "dot-event <oss@dot-event.io>",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/dot-event/core.git"
+    "url": "git+ssh://git@github.com/dot-event/store.git"
   },
   "license": "MIT",
-  "homepage": "https://github.com/dot-event/core#readme",
+  "homepage": "https://github.com/dot-event/store#readme",
   "operations": {
     "git": {},
     "link": {},
