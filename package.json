@@ -1,19 +1,20 @@
 {
   "name": "dot-store",
   "version": "5.5.0",
-  "description": "Event emitter & store that promotes decoupled and readable code",
+  "description": "dot-event store operation",
   "keywords": [
+    "dot-event",
     "immutable",
     "store"
   ],
-  "author": "dot-store <oss@dot-store.io>",
+  "author": "dot-event <oss@dot-event.io>",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/dot-store/core.git"
+    "url": "git+ssh://git@github.com/dot-event/core.git"
   },
   "license": "MIT",
-  "homepage": "https://github.com/dot-store/core#readme",
-  "cyclops": {
+  "homepage": "https://github.com/dot-event/core#readme",
+  "operations": {
     "git": {},
     "link": {},
     "starter": {},
