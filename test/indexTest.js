@@ -16,6 +16,17 @@ test("delete", async () => {
   expect(store.get("hello.world")).toBeUndefined()
 })
 
+test("delete with function", async () => {
+  const state = { hello: { world: true } }
+  const store = dotStore({ events: new Events(), state })
+
+  await store.delete("hello.world", async () => false)
+  expect(store.get("hello.world")).not.toBeUndefined()
+
+  await store.delete("hello.world", async () => true)
+  expect(store.get("hello.world")).toBeUndefined()
+})
+
 test("merge", async () => {
   const state = { hello: { world: true } }
   const store = dotStore({ events: new Events(), state })
