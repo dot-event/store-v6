@@ -18,7 +18,27 @@
     "git": {},
     "link": {},
     "starter": {},
-    "version": {}
+    "version": {},
+    "watchman": {
+      "triggers": [
+        {
+          "name": "babel",
+          "expression": [
+            "anyof",
+            [
+              "match",
+              "lib/**/*.js",
+              "wholename"
+            ]
+          ],
+          "command": [
+            "npm",
+            "run",
+            "build"
+          ]
+        }
+      ]
+    }
   },
   "starters": [
     "basics",
@@ -56,7 +76,7 @@
     "prettier": "1.14.3",
     "rimraf": "2.6.2"
   },
-  "main": "dist/core.js",
+  "main": "dist/store.js",
   "scripts": {
     "build": "babel lib --out-dir dist --source-maps",
     "prepublishOnly": "rimraf dist; npm run build",
@@ -65,9 +85,6 @@
     "lint": "eslint --ignore-path .gitignore --ext=js .",
     "pretty": "prettier --write **/*.css **/*.json **/*.md",
     "test": "jest"
-  },
-  "links": {
-    "dot-event": "../dot-event"
   },
   "babel": {
     "presets": [
@@ -198,25 +215,5 @@
       "<rootDir>/test/**/*Test.js"
     ],
     "testURL": "http://localhost"
-  },
-  "watchman": {
-    "triggers": [
-      {
-        "name": "babel",
-        "expression": [
-          "anyof",
-          [
-            "match",
-            "lib/**/*.js",
-            "wholename"
-          ]
-        ],
-        "command": [
-          "npm",
-          "run",
-          "build"
-        ]
-      }
-    ]
   }
 }

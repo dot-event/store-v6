@@ -1,123 +1,101 @@
-import Events from "dot-event"
 import dotStore from "../dist/core"
 
 test("get", () => {
   const state = { hello: { world: true } }
-  const store = dotStore({ events: new Events(), state })
+  const { events } = dotStore({ state })
 
-  expect(store.get("hello.world")).toBe(true)
+  expect(events.get("hello.world")).toBe(true)
 })
 
 test("delete", async () => {
   const state = { hello: { world: true } }
-  const store = dotStore({ events: new Events(), state })
+  const { events } = dotStore({ state })
 
-  await store.delete("hello.world")
-  expect(store.get("hello.world")).toBeUndefined()
+  await events.delete("hello.world")
+  expect(events.get("hello.world")).toBeUndefined()
 })
 
 test("delete with function", async () => {
   const state = { hello: { world: true } }
-  const store = dotStore({ events: new Events(), state })
+  const { events } = dotStore({ state })
 
-  await store.delete("hello.world", async () => false)
-  expect(store.get("hello.world")).not.toBeUndefined()
+  await events.delete("hello.world", async () => false)
+  expect(events.get("hello.world")).not.toBeUndefined()
 
-  await store.delete("hello.world", async () => true)
-  expect(store.get("hello.world")).toBeUndefined()
+  await events.delete("hello.world", async () => true)
+  expect(events.get("hello.world")).toBeUndefined()
 })
 
 test("merge", async () => {
   const state = { hello: { world: true } }
-  const store = dotStore({ events: new Events(), state })
+  const { events } = dotStore({ state })
 
-  await store.merge("hello", { hi: true })
-  expect(store.get("hello")).toEqual({
+  await events.merge("hello", { hi: true })
+  expect(events.get("hello")).toEqual({
     hi: true,
     world: true,
   })
 })
 
 test("merge with function", async () => {
-  const store = dotStore({ events: new Events() })
+  const { events } = dotStore()
   const promises = []
 
-  await store.set("counter.test", 0)
+  await events.set("counter.test", 0)
 
   for (let i = 0; i < 100; i++) {
     promises.push(
-      store.merge("counter", ({ get }) => ({
+      events.merge("counter", ({ get }) => ({
         test: get("counter.test") + 1,
       }))
     )
   }
 
   await Promise.all(promises)
-  expect(store.get("counter.test")).toBe(100)
+  expect(events.get("counter.test")).toBe(100)
 })
 
 test("set", async () => {
-  const store = dotStore({ events: new Events() })
+  const { events } = dotStore()
 
-  await store.set("hello.world", true)
-  expect(store.get("hello.world")).toBe(true)
+  await events.set("hello.world", true)
+  expect(events.get("hello.world")).toBe(true)
 
-  await store.set("hello.world", { hi: true })
-  expect(store.get("hello.world")).toEqual({ hi: true })
+  await events.set("hello.world", { hi: true })
+  expect(events.get("hello.world")).toEqual({ hi: true })
 })
 
 test("set emits", async () => {
-  const events = new Events()
-  const store = dotStore({ events })
+  const { events } = dotStore()
   const fn = jest.fn()
 
-  events.on("store.hello.world", fn)
+  events.on("set.hello.world", fn)
 
-  await store.set("hello.world", true)
+  await events.set("hello.world", true)
   expect(fn.mock.calls.length).toBe(1)
 })
 
-test("set emit provides options", async () => {
-  const events = new Events()
-  const store = dotStore({ events })
-
-  expect.assertions(3)
-
-  events.on(
-    "store.hello.world",
-    ({ prevGet, store: optionStore }) => {
-      expect(prevGet()).toEqual({})
-      expect(optionStore).toBe(store)
-      expect(store.get()).toEqual({
-        hello: { world: true },
-      })
-    }
-  )
-
-  await store.set("hello.world", true)
-})
-
 test("set with function", async () => {
-  const store = dotStore({ events: new Events() })
+  const { events } = dotStore()
   const promises = []
 
-  await store.set("counter", 0)
+  await events.set("counter", 0)
 
   for (let i = 0; i < 100; i++) {
     promises.push(
-      store.set("counter", ({ get }) => get("counter") + 1)
+      events.set("counter", ({ get }) => get("counter") + 1)
     )
   }
 
   await Promise.all(promises)
-  expect(store.get("counter")).toBe(100)
+  expect(events.get("counter")).toBe(100)
 })
 
 test("time", async () => {
-  const store = dotStore({ events: new Events() })
+  const { events } = dotStore()
 
-  await store.time("hello.world")
-  expect(store.get("hello.world")).toEqual(
+  await events.time("hello.world")
+  expect(events.get("hello.world")).toEqual(
     expect.any(Number)
   )
 })
