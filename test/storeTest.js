@@ -1,4 +1,4 @@
-import dotStore from "../dist/core"
+import dotStore from "../"
 
 test("get", () => {
   const state = { hello: { world: true } }
