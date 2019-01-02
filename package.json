@@ -56,7 +56,7 @@
   "dependencies": {
     "@babel/runtime": "7.2.0",
     "@dot-store/dot-prop-immutable": "3.1.0",
-    "dot-event": "2.12.10"
+    "dot-event": "2.12.8"
   },
   "devDependencies": {
     "@babel/cli": "7.2.0",
